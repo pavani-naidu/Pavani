@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --app-bg: #1a0b2e;
+}
+
+body {
+  background-color: var(--app-bg);
+  color: white;
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 0.5s ease;
+}
+
+/* Palette Overrides - Removed as Midnight is now default */
+
+/* 1. Glassmorphism */
+.style-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+.style-glass::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+  opacity: 0;
+  pointer-events: none;
+}
+.style-glass:hover::before {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+}
+.style-glass:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.15);
+  transform: translateY(-8px);
+}
+.style-glass:active {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.4),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+  transform: translateY(2px) scale(0.98);
+}
+
+/* 2. Claymorphism */
+.style-clay {
+  background: #1e2128;
+  border-radius: 40px;
+  box-shadow: 
+    12px 12px 24px rgba(0, 0, 0, 0.4), 
+    -12px -12px 24px rgba(255, 255, 255, 0.02),
+    inset 10px 10px 20px rgba(0, 0, 0, 0.3),
+    inset -10px -10px 20px rgba(255, 255, 255, 0.03);
+  border: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.style-clay:hover {
+  background: #2d313c;
+  box-shadow: 
+    20px 20px 40px rgba(0, 0, 0, 0.6), 
+    -20px -20px 40px rgba(255, 255, 255, 0.04),
+    inset 8px 8px 16px rgba(0, 0, 0, 0.2),
+    inset -8px -8px 16px rgba(255, 255, 255, 0.05),
+    0 0 20px rgba(255, 255, 255, 0.03);
+  transform: translateY(-6px);
+}
+.style-clay:active {
+  background: #1a1c22;
+  box-shadow: 
+    inset 15px 15px 30px rgba(0, 0, 0, 0.5),
+    inset -15px -15px 30px rgba(255, 255, 255, 0.02);
+  transform: translateY(2px) scale(0.97);
+}
+
+/* 3. Minimalism */
+.style-minimal {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+.style-minimal:hover {
+  background: white;
+  color: #080a10;
+  border-color: white;
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.08em;
+}
+.style-minimal:active {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(0.95) translateY(0);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* 4. Liquid Glass */
+.style-liquid {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+.style-liquid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+.style-liquid:hover::before {
+  left: 100%;
+}
+.style-liquid:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.25);
+  transform: translateY(-8px) scale(1.04);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+}
+.style-liquid:active {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  transform: translateY(2px) scale(0.98);
+  background: rgba(255, 255, 255, 0.05);
+}
+.style-liquid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+}
+
+/* 5. Skeuomorphism */
+.style-skeuo {
+  background: #14161d;
+  box-shadow: 
+    8px 8px 16px #040508, 
+    -8px -8px 16px #12151b;
+  border: 1px solid #1a1d26;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.style-skeuo:hover {
+  box-shadow: 
+    15px 15px 30px #020305, 
+    -15px -15px 30px #181b26,
+    0 0 15px rgba(255, 255, 255, 0.05);
+  border-color: #32374a;
+  transform: translateY(-4px);
+}
+.style-skeuo:active {
+  box-shadow: 
+    inset 10px 10px 20px #020305, 
+    inset -10px -10px 20px #181b26;
+  border-color: #14161d;
+  transform: translateY(6px);
+}
+.style-skeuo:active {
+  box-shadow: 
+    inset 8px 8px 16px #040508, 
+    inset -8px -8px 16px #12151b;
+  transform: translateY(4px);
+}
+
+/* Accessibility & Bright Animations */
+:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 4px;
+}
+
+.style-glass { background: rgba(255, 255, 255, 0.2); border-color: white; }
+.style-clay { background: #2a2d35; border: 2px solid white; }
+.style-minimal { border-width: 2px; border-color: white; }
+.style-liquid { background: rgba(255, 255, 255, 0.25); border-color: white; }
+.style-skeuo { background: #1e2128; border: 2px solid white; }
+
+.high-contrast-text {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  font-weight: 700 !important;
+}
+
+.bright-burst {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes sparkle {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.sparkle-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white;
+  animation: sparkle 0.8s ease-out forwards;
+}
+
